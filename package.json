@@ -1,0 +1,28 @@
+{
+  "name": "photopodra",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:mobile": "npm --prefix frontend run build && npm --prefix frontend run cap:sync",
+    "build:desktop": "npm --prefix frontend run build:desktop",
+    "dev:desktop": "npm --prefix frontend run dev:desktop",
+    "cap:android": "npm --prefix frontend run cap:android",
+    "cap:ios": "npm --prefix frontend run cap:ios",
+    "init:samples": "npm --prefix backend run init:samples",
+    "start": "npm --prefix backend start"
+  },
+  "keywords": [
+    "photo-gallery",
+    "google-photos",
+    "local-first"
+  ],
+  "author": "",
+  "license": "ISC"
+}

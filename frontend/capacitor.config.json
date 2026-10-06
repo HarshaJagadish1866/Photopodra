@@ -1,0 +1,12 @@
+{
+  "appId": "com.photopodra.app",
+  "appName": "Photopodra",
+  "webDir": "dist",
+  "server": {
+    "cleartext": true,
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

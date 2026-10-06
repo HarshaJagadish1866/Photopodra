@@ -1,0 +1,45 @@
+services:
+  photopodra:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: photopodra:latest
+    container_name: photopodra-server
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - MEDIA_DIR=/app/media
+      - DATA_DIR=/app/data
+      - THUMBNAILS_DIR=/app/thumbnails
+      - DB_PATH=/app/data/photos.db
+      - ALLOWED_ORIGINS=*
+    volumes:
+      # Persistent host directory mounts
+      - ./media:/app/media
+      - ./data:/app/data
+      - ./thumbnails:/app/thumbnails
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # Optional Cloudflare Tunnel service
+  # Run with: docker compose --profile tunnel up -d
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: photopodra-tunnel
+    restart: unless-stopped
+    profiles:
+      - tunnel
+    environment:
+      # Set your Cloudflare Tunnel Token from Zero Trust Dashboard
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:-}
+    command: tunnel --no-autoupdate run
+    depends_on:
+      photopodra:
+        condition: service_healthy

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Photopodra</string>
+    <string name="title_activity_main">Photopodra</string>
+    <string name="package_name">com.photopodra.app</string>
+    <string name="custom_url_scheme">com.photopodra.app</string>
+</resources>

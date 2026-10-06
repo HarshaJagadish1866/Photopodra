@@ -1,0 +1,35 @@
+[Unit]
+Description=Photopodra Central Photo Server
+Documentation=https://github.com/your-username/photopodra
+After=network.target
+
+[Service]
+Type=simple
+# Replace 'photopodra' with the system user running the service
+User=photopodra
+Group=photopodra
+WorkingDirectory=/opt/photopodra
+ExecStart=/usr/bin/node backend/src/index.js
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=photopodra
+
+# Process Environment Configuration
+Environment=NODE_ENV=production
+Environment=PORT=3001
+Environment=MEDIA_DIR=/opt/photopodra/media
+Environment=DATA_DIR=/opt/photopodra/data
+Environment=THUMBNAILS_DIR=/opt/photopodra/thumbnails
+Environment=DB_PATH=/opt/photopodra/data/photos.db
+Environment=ALLOWED_ORIGINS=*
+
+# Security Hardening Sandbox
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

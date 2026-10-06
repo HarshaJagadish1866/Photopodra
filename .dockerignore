@@ -1,0 +1,36 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies
+node_modules
+*/node_modules
+
+# Build artifacts & caches
+dist
+*/dist
+.cache
+*/.cache
+.system_generated
+.tempmediaStorage
+
+# Native mobile & desktop targets
+frontend/android
+frontend/ios
+frontend/src-tauri/target
+
+# Local media, thumbnails and database storage (mounted via volumes)
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+thumbnails/256/*
+thumbnails/1024/*
+media/*
+!media/.gitkeep
+
+# Environment & log files
+*.log
+.env
+.env.local
+.DS_Store
