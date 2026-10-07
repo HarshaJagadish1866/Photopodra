@@ -153,6 +153,16 @@ Photopodra/
 - **Systemd & Windows PM2**: Background service auto-start configurations (`photopodra.service`, `ecosystem.config.cjs`, `deploy/setup-windows-pm2.bat`).
 - **Free Cloudflare Tunnel**: Zero open router ports, free SSL certificates, and custom domain mapping (`https://photos.yourdomain.com`). See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for full setup instructions.
 
+### Phase 9: Low-Spec Windows CI/CD Workflow (`.github/workflows/build-windows.yml`)
+- **HDD & Low-Spec Optimizations (`Cargo.toml`)**:
+  - `opt-level = "s"`: Optimizes code footprint for minimal binary size to minimize disk read operations on mechanical HDDs (5400/7200 RPM).
+  - `lto = true`: Link-Time Optimization removes unused functions across crates.
+  - `codegen-units = 1`: Whole-program compilation for maximum optimization and dead-code stripping.
+  - `strip = true`: Removes symbols and debug tables, reducing `.exe` size by ~50%.
+- **Zero-Setup Cross-Compilation via GitHub Actions**:
+  - Automatic `windows-latest` pipeline building NSIS `.exe` and `.msi` installers without requiring local Windows or MSVC build tools on macOS.
+  - Generates downloadable build artifacts under the GitHub Actions run summary.
+
 ---
 
 ## API Summary Table
