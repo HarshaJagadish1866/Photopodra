@@ -41,6 +41,9 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci --workspace frontend --include-workspace-root=false
 
+      - name: Ensure Windows Rolldown native binding
+        run: npm install --workspace frontend --include-workspace-root=false --no-save --package-lock=false @rolldown/binding-win32-x64-msvc@1.2.12
+
       - name: Build Tauri Windows app
         run: npm --prefix frontend run tauri -- build
 
